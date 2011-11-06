@@ -5,6 +5,7 @@ package Proc::Daemontools::PP::Service;
 use strict;
 use warnings;
 use Carp;
+use File::Spec::Functions 'catfile';
 
 # VERSION
 # AUTHORITY
@@ -16,5 +17,13 @@ sub new {
 
   return bless \$dir, $class;
 }
+
+# cf svstat.c, lines 44-53
+sub is_normally_up {
+  my $self = shift;
+
+  return !-e catfile($$self, 'down');
+}
+
 
 1;
