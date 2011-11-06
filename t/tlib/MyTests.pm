@@ -13,7 +13,7 @@ sub service {
 
   my $dt;
   is(exception { $dt = Proc::Daemontools::PP::Service->new(@rest) },
-    undef, 'Create P::D::PP::Service ok');
+    undef, "Create P::D::PP::Service ok for '@rest'");
   ok($dt,                                        '... got something');
   ok($dt->isa('Proc::Daemontools::PP::Service'), '... of the proper type');
 
