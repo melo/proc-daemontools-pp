@@ -36,5 +36,17 @@ sub time {
   return $class->new($h, $t);
 }
 
+sub epoch {
+  my ($self) = @_;
+  my ($h, $l) = @$self;
+
+  # TODO: can we check for 64-bit clean localtime()?
+  die "Epoch overflow (for 32bit systems, 31bit epoch) H:$h L:$l"
+    if $h != 1073741824
+      or $l > 2147483657
+      or $l < 10;
+
+  return $l - 10;
+}
 
 1;

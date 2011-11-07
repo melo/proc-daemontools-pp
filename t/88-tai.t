@@ -69,9 +69,11 @@ subtest 'TAI->time' => sub {
     [1073741824, '4611686019501129738', 1073741824, 1073741834],
     [1811991144, '4611686020239379058', 1073741824, 1811991154],
     [2147483647, '4611686020574871561', 1073741824, 2147483657],
-    [2153981546, '4611686020581369460', 1073741824, 2153981556],
+    [2147483647, '4611686020574871561', 1073741824, 2147483657],
 
-    # TODO: add these two test cases when $Config{intsize} > 4
+    # TODO: add these three test cases when $Config{intsize} > 4 or
+    # localtime() 64bit clean
+    # [2153981546, '4611686020581369460', 1073741824, 2153981556],
     # [4294967296, '4611686022722355210', 1073741825, 10],
     # [5362454315, '4611686023789842229', 1073741825, 1067487029],
   );
@@ -85,6 +87,8 @@ subtest 'TAI->time' => sub {
       '... of the expected type');
     is($tai_obj->[0], $h, '... most significant part of TAI is correct');
     is($tai_obj->[1], $l, '... and so is the least significant part');
+
+    is($tai_obj->epoch, $epoch, '... epoch is back just fine');
   }
 };
 
