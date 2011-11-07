@@ -62,5 +62,18 @@ sub cmp {
   return $self->[0] <=> $other->[0] || $self->[1] <=> $other->[1];
 }
 
+sub delta {
+  my ($self, $other) = @_;
+
+  ## Simplified version because we don't accept nothing except 31bit epochs
+  return abs($self->[1] - $other->[1]);
+}
+
+sub delta_now {
+  my $self = shift;
+
+  return $self->delta(ref($self)->now);
+}
+
 
 1;

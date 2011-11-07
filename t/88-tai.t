@@ -112,6 +112,19 @@ subtest 'cmp()' => sub {
 };
 
 
+subtest 'delta()/delta_now()' => sub {
+  my $now_e = time();
+  my $t0    = Proc::Daemontools::PP::TAI->time($now_e);
+  my $t1    = Proc::Daemontools::PP::TAI->time($now_e - 42);
+  my $now_t = Proc::Daemontools::PP::TAI->now;
+
+  is($t1->delta($t0), 42, 'delta() works ok');
+  is($t0->delta($t1), 42, '... and its commutative');
+
+  my $d = $t1->delta_now - 42;
+  ok($d == 0 || $d == 1, 'delta_now() also works fine');
+};
+
 done_testing();
 
 
