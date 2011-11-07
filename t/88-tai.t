@@ -93,6 +93,14 @@ subtest 'TAI->time' => sub {
 };
 
 
+subtest 'now()' => sub {
+  my $now_t = Proc::Daemontools::PP::TAI->now;
+  my $now_e = $now_t->epoch;
+  my $delta = time() - $now_e;
+  ok($delta == 0 || $delta == 1, 'TAI->now() works');
+};
+
+
 done_testing();
 
 

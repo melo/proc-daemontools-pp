@@ -36,6 +36,8 @@ sub time {
   return $class->new($h, $t);
 }
 
+sub now { shift->time(CORE::time()) }
+
 sub epoch {
   my ($self) = @_;
   my ($h, $l) = @$self;
