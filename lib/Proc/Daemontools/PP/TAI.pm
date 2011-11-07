@@ -51,4 +51,9 @@ sub epoch {
   return $l - 10;
 }
 
+sub cmp {
+  my ($self, $other) = @_;
+  return $self->[0] <=> $other->[0] || $self->[1] <=> $other->[1];
+}
+
 1;

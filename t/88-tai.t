@@ -101,6 +101,17 @@ subtest 'now()' => sub {
 };
 
 
+subtest 'cmp()' => sub {
+  my $now = time;
+  my $t1  = Proc::Daemontools::PP::TAI->time($now - 10);
+  my $t2  = Proc::Daemontools::PP::TAI->time($now + 10);
+
+  is($t1->cmp($t1), 0,  'cmp() to self returns equal');
+  is($t1->cmp($t2), -1, 'cmp() to biggers returns we are less than');
+  is($t2->cmp($t1), 1,  'cmp() to smallers returns we are greater than');
+};
+
+
 done_testing();
 
 
